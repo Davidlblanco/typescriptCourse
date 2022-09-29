@@ -3,10 +3,15 @@ import { NegociacaoController } from "./controllers/negociacqo-controller.js";
 
 const controller = new NegociacaoController();
 const form = document.querySelector('.form')
-form.addEventListener('submit', (e) => {
-    e.preventDefault()
-    controller.adiciona()
-})
+if (form) {
+    form.addEventListener('submit', (e) => {
+        e.preventDefault()
+        controller.adiciona()
+    })
+}
+else {
+    throw Error('Não foi possível inicializar a aplicação, verifique se o form existe.')
+}
 
 // const negociacoes = new NegociacoesView()
 // const template = negociacoes.template()
