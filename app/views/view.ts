@@ -4,9 +4,9 @@ export abstract class View<T> {
         this.element = document.querySelector(selector)
     }
 
-    update(model: T): void {
+    public update(model: T): void {
         const template = this.template(model)
         this.element.innerHTML = template
     }
-    abstract template(model: T): string
+    protected abstract template(model: T): string
 }
