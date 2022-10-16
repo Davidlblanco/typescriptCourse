@@ -11,4 +11,7 @@ export class Negociacoes {
     paraTexto() {
         return ``;
     }
+    eIgual(obj) {
+        return JSON.stringify(this.negociacoes) == JSON.stringify(obj);
+    }
 }
