@@ -10,3 +10,4 @@ export function inspect() {
         };
     };
 }
+//# sourceMappingURL=inspect.js.map
