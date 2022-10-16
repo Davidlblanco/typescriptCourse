@@ -4,6 +4,7 @@ import { logarTempoDeExecucao } from "../decorators/logar-tempo-de-execucao.js"
 import { diasDaSemena } from "../enums/dias-da-semana.js"
 import { Negociacao } from "../models/negociacao.js"
 import { Negociacoes } from "../models/negociacoes.js"
+import { NegociacoesService } from "../services/negociacoes-services.js"
 import { MensagemView } from "../views/mensagem-view.js"
 import { NegociacoesView } from "../views/negociacoes-view.js"
 
@@ -17,6 +18,7 @@ export class NegociacaoController {
     private negociacoes: Negociacoes = new Negociacoes
     private negociacoesView: NegociacoesView = new NegociacoesView('#negociacoesView')
     private mensagenView = new MensagemView('#mensagemView')
+    private negociacoesService = new NegociacoesService()
 
     constructor() {
 
@@ -41,6 +43,16 @@ export class NegociacaoController {
         this.atualizaView()
         this.limparFormulario()
     }
+    importaDados(): void {
+        this.negociacoesService.obterNegociacoes()
+            .then(negociacoesDeHoje => {
+                for (let negociacao of negociacoesDeHoje) {
+                    this.negociacoes.adiciona(negociacao)
+                }
+                this.negociacoesView.update(this.negociacoes)
+            })
+    }
+
 
     private diaUtil(date: Date): boolean {
         return date.getDay() > diasDaSemena.DOMINGO && date.getDay() < diasDaSemena.SABADO
